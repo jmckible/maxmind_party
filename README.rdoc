@@ -1,0 +1,21 @@
+= maxmind_party
+
+This is a Ruby wrapper for {MaxMind's}[http://www.maxmind.com] GeoIP City web service. It uses John Nunemaker's {HTTParty}[http://github.com/jnunemaker/httparty].
+
+First, authorize with your API key
+
+  MaxMind::GeoIP.authorize 'yourapikeyhere'
+  
+Then lookup an IP
+
+  >> MaxMind::GeoIP.lookup '207.97.227.239'
+  => #<MaxMind::Location:0x101552a10 @valid=true, @region="TX", @long="-98.574799", @country="US", @lat="29.507200", @ip="207.97.227.239", @city="San Antonio">
+  
+If something goes horribly wrong, it'll likely look like this
+
+  >> location = MaxMind::GeoIP.lookup('127.0.0.1')
+  => #<MaxMind::Location:0x1015286e8 @valid=false, @ip="127.0.0.1">
+  >> location.valid?
+  => false
+  >> location.error_message
+  => 'IP_NOT_FOUND'
