@@ -14,7 +14,7 @@ module MaxMind
       GeoIP.base_uri uri
     end
 
-    def self.lookup(ip)
+    def self.locate(ip)
       raise 'Please authorize with your API key' unless default_options[:base_uri]
       Location.new ip, GeoIP.get('/b', :query=>{:i=>ip})
     end
